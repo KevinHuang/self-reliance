@@ -1,0 +1,24 @@
+<div><a ui-sref=newjob class="pull-right btn btn-primary btn-outline btn-rounded">Post New Job</a>
+
+    <h2>Want to find a job?</h2>
+    <div id="custom-search-input">
+        <div class="input-group col-md-12">
+            <input type="text" class="form-control input-lg" placeholder="設計" ng-model="query" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+        </div>
+    </div>
+    <div class=jumbotron>
+        <div class=container><br><br>
+            <ul class="phones">
+                <li ng-repeat="job in jobs | filter:query">
+                    {{job.jobname}}
+                    <p>{{job.desc}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

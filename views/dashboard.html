@@ -1,0 +1,31 @@
+<div class=dashboard-page>
+    <div class=container-fluid>
+        <div class=row>
+            <div class="col-sm-3 col-md-2 sidebar">
+                <div class=text-center>
+                     <h2> 工作教育網
+                        <small><br/>自立支援</small>
+                     </h2>
+
+                    <!-- TODO: Change to personal profile, make a page first-->
+                    <a ui-sref="profile">
+                    <img src=images/flat-avatar.png class=user-avatar>
+                    </a>
+
+                    <br> <a ui-sref=login class="btn btn-white btn-outline btn-rounded btn-sm">Logout</a>
+                </div>
+                <ul class="nav nav-sidebar">
+                    <li ng-class="{active: $state.includes('job')}"><a ui-sref=job>Job <span
+                            class=sr-only>(current)</span></a></li>
+                    <li ng-class="{active: $state.includes('education')}"><a ui-sref=education>Education</a></li>
+                    <li ng-class="{active: $state.includes('business')}"><a ui-sref=business>Business</a></li>
+                    <hr/>
+                    <!--TODO: 看看如何把自立支援社團用 bootstrap modal 內嵌到網頁中-->
+                    <li><a href=https://www.facebook.com/groups/291785364347235 target="_blank">自立支援社團</a></li>
+
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ui-view=""></div>
+        </div>
+    </div>
+</div>
