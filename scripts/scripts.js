@@ -2,8 +2,8 @@
 angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "ngResource"])
 
     .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.when("/dashboard", "/dashboard/job", "/profile", "/jobdetail"),
-            $urlRouterProvider.otherwise("/login"),
+        $urlRouterProvider.when("/dashboard", "/dashboard/job"),
+            $urlRouterProvider.otherwise("/dashboard/job"),
             $stateProvider.state("base", {"abstract": !0, url: "", templateUrl: "views/base.html"})
                 .state("login", {
                     url: "/login",
@@ -90,7 +90,7 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
         }
     }])
 
-    .controller("newJobCtrl",["$scope", "$firebaseArray","$location", function ($scope, $firebaseArray, $location) {
+    .controller("newJobCtrl", ["$scope", "$firebaseArray", "$location", function ($scope, $firebaseArray, $location) {
         var ref = new Firebase("https://amber-heat-6612.firebaseio.com/jobs");
         $scope.jobtypes = jobtypes;
         $scope.needfix = false;
@@ -98,7 +98,7 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
         $scope.user = null;
         $scope.jobtype = "";
         $scope.jobs = [];
-        $scope.$watch('newjob.jobtype', function(v){
+        $scope.$watch('newjob.jobtype', function (v) {
             if ($scope.newjob.jobtype) {
                 $scope.jobs = $scope.newjob.jobtype.jobs;
                 return console.log($scope.newjob.jobtype.jobs);
@@ -106,27 +106,18 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
         });
         $scope.njobs = $firebaseArray(ref);
 
-        $scope.submit = function(){
-            var check, t1, t2, now, ref1, ref2;
-            check = ['jobname', 'salary2', 'salary1', 'company', 'email', 'jobtype', 'location', 'title'];
-            t1 = $scope.newjobform.salary1;
-            t2 = $scope.newjobform.salary2;
-            t1.$setValidity('salary1', $scope.newjob.salary1 < 67000 ? false : true);
-            t2.$setValidity('salary2', isNaN($scope.newjob.salary2) || $scope.newjob.salary2 < $scope.newjob.salary1 ? false : true);
-
+        $scope.submit = function () {
             var now = new Date().getTime();
             $scope.newjob.time = now;
-            $scope.newjob.jobtype.jobs = { };
+            $scope.newjob.jobtype.jobs = {};
             console.dir($scope.newjob)
-            // create a synchronized array
 
-            $scope.njobs.$add( $scope.newjob);
+            $scope.njobs.$add($scope.newjob);
             $scope.needfix = false;
             console.log("job added");
-            $scope.newjobs = null ;
-            return $location.path("job");
+            $scope.newjobs = null;
+            return $location.path("/job"), !1
         };
-
 
     }])
 
@@ -150,26 +141,17 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
         };
     })
 
-    .factory('Entry', function($resource) {
+    .factory('Entry', function ($resource) {
         return $resource('https://amber-heat-6612.firebaseio.com/jobs/:id.json'); // Note the full endpoint address
     })
 
-    .controller("JobDetailCtrl",["$scope","$stateParams","Entry","$firebaseArray", function ($scope,$stateParams,Entry,$firebaseArray) {
+    .controller("JobDetailCtrl", ["$scope", "$stateParams", "Entry", "$firebaseArray", function ($scope, $stateParams, Entry, $firebaseArray) {
         console.log($stateParams.jobId);
-
-        $scope.entry = Entry.get({ id:$stateParams.jobId });
+        $scope.entry = Entry.get({id: $stateParams.jobId});
         console.log($scope.entry);
-
     }])
 
-    .controller("JobCtrl",["$scope", "$firebaseArray", function ($scope, $firebaseArray) {
+    .controller("JobCtrl", ["$scope", "$firebaseArray", function ($scope, $firebaseArray) {
         var ref = new Firebase("https://amber-heat-6612.firebaseio.com/jobs");
-
-        // create a synchronized array
         $scope.jobs = $firebaseArray(ref);
-        //$scope.submit = function(id){
-        //
-        //
-        //};
-
     }]);

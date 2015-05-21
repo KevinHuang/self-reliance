@@ -22,6 +22,7 @@
                         <th>職缺</th>
                         <th>工作地點</th>
                         <th>工作內容</th>
+                        <th>條件要求</th>
                         <th>公司名稱</th>
                         <th>月薪範圍</th>
                         <th>詳細資料</th>
@@ -31,8 +32,9 @@
                     <tbody>
                     <tr ng-repeat="job in jobs | filter:query" >
                         <td>{{ job.title }}</td>
-                        <td>{{ job.location }}</td>
+                        <td>{{ job.location|cut:true:6 }}</td>
                         <td>{{ job.desc |cut:true:30 }}</td>
+                        <td>{{ job.requirement |cut:true:30 }}</td>
                         <td><a href="{{job.url}}">{{ job.company }}</a></td>
                         <td>{{ job.salary1|currency:limitTo:0}} - {{ job.salary2 |currency: limitTo:0}}</td>
                         <td><a href="#/dashboard/jobdetail/{{ job.$id}}"><span class="glyphicon glyphicon-th-list"></span></a> </td>
