@@ -3,7 +3,7 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
 
     .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.when("/dashboard", "/dashboard/job", "/profile", "/jobdetail"),
-            //$urlRouterProvider.otherwise("/login"),
+            $urlRouterProvider.otherwise("/login"),
             $stateProvider.state("base", {"abstract": !0, url: "", templateUrl: "views/base.html"})
                 .state("login", {
                     url: "/login",
