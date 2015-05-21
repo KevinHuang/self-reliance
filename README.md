@@ -1,5 +1,6 @@
 # 自立支援網站 
 A site for self-relience program
+#(本網站尚未完成！！！ 徵求志願者！！)
 
 我有個想法，架一個網站讓教會成員使用
 
