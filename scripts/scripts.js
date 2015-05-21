@@ -149,6 +149,10 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
         console.log($stateParams.jobId);
         $scope.entry = Entry.get({id: $stateParams.jobId});
         console.log($scope.entry);
+        console.log($scope.entry.title);
+        console.log($scope.entry.jobtype);
+        console.log($scope.entry.jobname);
+        console.log($scope.entry.salary1);
     }])
 
     .controller("JobCtrl", ["$scope", "$firebaseArray", function ($scope, $firebaseArray) {

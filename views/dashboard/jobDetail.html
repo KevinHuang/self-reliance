@@ -17,7 +17,7 @@
             <h4>職業別</h4>
         </div>
         <div class="col-sm-9">
-            <select name="jobtype" ng-model="entry.jobtype"  required="" class="form-control ng-pristine ng-invalid ng-invalid-required"><option value="" class="">請選取</option><option value="0">農林漁牧職類</option><option value="1">採礦冶金職類</option><option value="2">軍公教職類</option><option value="3">經營管理職類</option><option value="4">專業人員職類</option><option value="5">人事法務職類</option><option value="6">醫療護理職類</option><option value="7">財會金融職類</option><option value="8">業務銷售職類</option><option value="9">行政秘書職類</option><option value="10">技術服務職類</option><option value="11">電腦資訊職類</option><option value="12">生產製造職類</option><option value="13">機械操作職類</option><option value="14">營建職類</option><option value="15">娛樂演藝職類</option><option value="16">傳播媒體職類</option><option value="17">交通服務職類</option><option value="18">餐飲旅遊職類</option><option value="19">保全警衛職類</option><option value="20">家事服務職類</option><option value="21">環境保護職類</option><option value="22">非技術服務職類</option></select>
+            <input name="jobtype" ng-model="entry.jobtype.name"  required="" class="form-control ng-pristine ng-invalid ng-invalid-required"></input>
         </div>
     </div>
     <div class="row">
@@ -25,7 +25,7 @@
             <h4>職業名</h4>
         </div>
         <div class="col-sm-9">
-            <select name="jobname" ng-model="entry.jobname"  required="" class="form-control ng-pristine ng-invalid ng-invalid-required"><option value="" class="">請選取</option></select>
+            <input name="jobname" ng-model="entry.jobname.name"  required="" class="form-control ng-pristine ng-invalid ng-invalid-required"></input>
         </div>
     </div>
     <div class="row taller">
@@ -108,7 +108,7 @@
             <h4>公司介紹</h4>
         </div>
         <div class="col-sm-9">
-            <textarea name="compdesc" ng-model="entry.compdesc" placeholder="請簡單描述職缺所在的公司(純文字排版)" style="min-height: 100px" class="form-control ng-pristine ng-valid"></textarea>
+            <textarea name="compdesc" ng-model="entry.compdesc" placeholder="請簡單描述職缺所在的公司(純文字排版)" style="min-height: 150px" class="form-control ng-pristine ng-valid"></textarea>
         </div>
     </div><br>
     <div class="row">
