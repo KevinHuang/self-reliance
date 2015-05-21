@@ -1,9 +1,9 @@
 "use strict";
-angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap"])
+angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "ngResource"])
 
     .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.when("/dashboard", "/dashboard/job"),
-            $urlRouterProvider.otherwise("/login"),
+        $urlRouterProvider.when("/dashboard", "/dashboard/job", "/profile", "/jobdetail"),
+            //$urlRouterProvider.otherwise("/login"),
             $stateProvider.state("base", {"abstract": !0, url: "", templateUrl: "views/base.html"})
                 .state("login", {
                     url: "/login",
@@ -42,6 +42,13 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap"])
                     parent: "dashboard",
                     templateUrl: "views/dashboard/postnewjob.html",
                     controller: "newJobCtrl"
+                })
+
+                .state("jobDetail", {
+                    url: "/jobdetail/:jobId",
+                    parent: "dashboard",
+                    templateUrl: "views/dashboard/jobDetail.html",
+                    controller: "JobDetailCtrl"
                 })
 
                 .state("education", {
@@ -123,10 +130,46 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap"])
 
     }])
 
+    .filter('cut', function () {
+        return function (value, wordwise, max, tail) {
+            if (!value) return '';
+
+            max = parseInt(max, 10);
+            if (!max) return value;
+            if (value.length <= max) return value;
+
+            value = value.substr(0, max);
+            if (wordwise) {
+                var lastspace = value.lastIndexOf(' ');
+                if (lastspace != -1) {
+                    value = value.substr(0, lastspace);
+                }
+            }
+
+            return value + (tail || ' …');
+        };
+    })
+
+    .factory('Entry', function($resource) {
+        return $resource('https://amber-heat-6612.firebaseio.com/jobs/:id.json'); // Note the full endpoint address
+    })
+
+    .controller("JobDetailCtrl",["$scope","$stateParams","Entry","$firebaseArray", function ($scope,$stateParams,Entry,$firebaseArray) {
+        console.log($stateParams.jobId);
+
+        $scope.entry = Entry.get({ id:$stateParams.jobId });
+        console.log($scope.entry);
+
+    }])
+
     .controller("JobCtrl",["$scope", "$firebaseArray", function ($scope, $firebaseArray) {
         var ref = new Firebase("https://amber-heat-6612.firebaseio.com/jobs");
 
         // create a synchronized array
         $scope.jobs = $firebaseArray(ref);
+        //$scope.submit = function(id){
+        //
+        //
+        //};
 
     }]);

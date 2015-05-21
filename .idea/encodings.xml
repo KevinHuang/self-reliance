@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/scripts/scripts.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/dashboard/job.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/dashboard/jobDetail.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/dashboard/postnewjob.html" charset="UTF-8" />
   </component>
 </project>
