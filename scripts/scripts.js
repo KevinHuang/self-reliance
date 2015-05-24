@@ -64,7 +64,7 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
     }])
 
 
-    .controller("LoginCtrl", ["$scope", "$location", function ($scope, $location,$firebaseAuth) {
+    .controller("LoginCtrl", ["$scope", "$location", "$firebaseAuth", function ($scope, $location,$firebaseAuth) {
         var ref = new Firebase("https://amber-heat-6612.firebaseio.com");
         var auth = $firebaseAuth(ref);
         // login with Facebook
