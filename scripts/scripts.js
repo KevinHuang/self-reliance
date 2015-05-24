@@ -65,6 +65,14 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
 
 
     .controller("LoginCtrl", ["$scope", "$location", function ($scope, $location) {
+        var ref = new Firebase("https://amber-heat-6612.firebaseio.com");
+        ref.authWithOAuthPopup("facebook", function(error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+            };
+        });
         $scope.submit = function () {
             console.log('Thsi is loginctrl!')
             return $location.path("/dashboard"), !1
