@@ -2,7 +2,6 @@
 
     <form id="new-job" name="entryform" novalidate="" ng-class="{'needfix':needfix}" class="ng-pristine ng-invalid ng-invalid-required">
     <h3><i class="glyphicon glyphicon-edit green"></i> 檢視職缺</h3>
-    <div class="small">任何刊登在此平台的職缺都必須要提供薪資範圍，並且最低值要高於六萬七千元 (新台幣)</div>
     <hr>
     <div class="row">
         <div class="col-xs-3">
@@ -28,7 +27,7 @@
             <h4>月薪範圍</h4>
         </div>
         <div class="col-xs-9">
-        <h4 class="text-info">{{entry.salary1 | currency:limit:0}} ~ {{entry.salary2 | currency:limit:0}}</h4>
+        <h4 ng-show="entry.salary1" class="text-info">{{entry.salary1 | currency:limit:0}} ~ {{entry.salary2 | currency:limit:0}}</h4>
         </div>
     </div>
     <div class="row taller">
