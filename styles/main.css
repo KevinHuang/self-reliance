@@ -7011,7 +7011,7 @@ button.close {
     }
 }
 @media screen and (max-width: 768px) {
-    .dashboard-page .main { padding-top: 75px; }
+    .dashboard-page .main { padding-top: 0px; }
 }
 
 .dashboard-page .main .page-header {
