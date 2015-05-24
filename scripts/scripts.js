@@ -122,6 +122,12 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
 
     }])
 
+    .filter('nl2br', function ($sce) {
+        return function (text) {
+            return text ? $sce.trustAsHtml(text.replace(/\n/g, '<br/>')) : '';
+        };
+    })
+
     .filter('cut', function () {
         return function (value, wordwise, max, tail) {
             if (!value) return '';
