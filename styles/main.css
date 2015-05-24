@@ -4639,7 +4639,8 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 
 .navbar-default {
     background-color: #f8f8f8;
-    border-color: #e7e7e7
+    border-color: #e7e7e7;
+    z-index: 1000
 }
 
 .navbar-default .navbar-brand {
@@ -7001,8 +7002,16 @@ button.close {
 @media (min-width: 768px) {
     .dashboard-page .main {
         padding-right: 40px;
-        padding-left: 40px
+        padding-left: 40px;
+        padding-top: 55px;
     }
+
+    .navbar {
+        display: none;
+    }
+}
+@media screen and (max-width: 768px) {
+    .dashboard-page .main { padding-top: 75px; }
 }
 
 .dashboard-page .main .page-header {

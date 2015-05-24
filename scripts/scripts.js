@@ -66,6 +66,7 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
 
     .controller("LoginCtrl", ["$scope", "$location", function ($scope, $location) {
         $scope.submit = function () {
+            console.log('Thsi is loginctrl!')
             return $location.path("/dashboard"), !1
         }
     }])
