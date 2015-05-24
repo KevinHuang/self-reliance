@@ -6990,7 +6990,7 @@ button.close {
     position: absolute;
     top: 0;
     bottom: 0;
-    overflow-x: hidden;
+    overflow-x: auto;
     overflow-y: auto
 }
 

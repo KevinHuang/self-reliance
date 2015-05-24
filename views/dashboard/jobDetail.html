@@ -52,7 +52,7 @@
         <div class="col-xs-3">
             <h4>工作內容</h4>
         </div>
-        <div class="col-xs-9">{{ entry.desc }}</div>
+        <div class="col-xs-9"><p ng-bind-html="entry.desc | nl2br"></p></div>
     </div>
         <hr/>
         <div class="row">
