@@ -64,14 +64,14 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
     }])
 
 
-    .controller("LoginCtrl", ["$scope", "$location", function ($scope, $location) {
+    .controller("LoginCtrl", ["$scope", "$location", function ($scope, $location,$firebaseAuth) {
         var ref = new Firebase("https://amber-heat-6612.firebaseio.com");
-        ref.authWithOAuthPopup("facebook", function(error, authData) {
-            if (error) {
-                console.log("Login Failed!", error);
-            } else {
-                console.log("Authenticated successfully with payload:", authData);
-            };
+        var auth = $firebaseAuth(ref);
+        // login with Facebook
+        auth.$authWithOAuthPopup("facebook").then(function(authData) {
+            console.log("Logged in as:", authData.uid);
+        }).catch(function(error) {
+            console.log("Authentication failed:", error);
         });
         $scope.submit = function () {
             console.log('Thsi is loginctrl!')
