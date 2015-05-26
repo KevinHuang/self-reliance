@@ -3,7 +3,8 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
 
     .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.when("/dashboard", "/dashboard/job"),
-            $urlRouterProvider.otherwise("/dashboard/job"),
+            //$urlRouterProvider.otherwise("/dashboard/job"),
+            $urlRouterProvider.otherwise("/login"),
             $stateProvider.state("base", {"abstract": !0, url: "", templateUrl: "views/base.html"})
                 .state("login", {
                     url: "/login",
@@ -71,7 +72,8 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
             var authData = ref.getAuth();
             if (authData) {
                 $scope.authData = authData;
-                $state.go('job');
+                //$state.go('job');
+                $state.transitionTo('job', null, {'reload': true});
             } else {
                 //$state.go('login');
             }
@@ -94,7 +96,7 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
                     console.dir(authData);
                     $scope.authdata = authData;
                     var ref = new Firebase("https://amber-heat-6612.firebaseio.com");
-                    ref.child("users").child(authData.uid).set({
+                    ref.child("users").child(authData.uid).update({
                         authdata: authData,
                         name: getName(authData)
                     });
@@ -126,16 +128,22 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
         function ($scope, $state, $rootScope, $location, $timeout) {
             $scope.$state = $state;
             var ref = new Firebase("https://amber-heat-6612.firebaseio.com");
+            var authData = ref.getAuth();
+            if (authData) {
+                $scope.authData = authData;
+            } else {
+                //$state.go('login');
+            }
+
+
             ref.onAuth(function (authData) {
                 if (authData) {
                     console.log("Authenticated with uid:", authData.uid);
-
-                    //$rootScope.authData = authData;
                     $scope.authData = authData;
                     console.log(authData);
                 } else {
                     console.log("Client unauthenticated.");
-                    $location.path('/login');
+                    $state.go('login');
                 }
             });
 
@@ -239,20 +247,24 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
         console.log($scope.entry.salary1);
     }])
 
-    .controller("JobCtrl", ["$scope", "$firebaseArray", "$rootScope", "$timeout",
-        function ($scope, $firebaseArray, $rootScope, $timeout) {
+    .controller("JobCtrl", ["$scope", "$firebaseArray", "$state", "$location",
+        function ($scope, $firebaseArray, $location, $state) {
             var ref = new Firebase("https://amber-heat-6612.firebaseio.com");
-            $scope.jobs = $firebaseArray(ref.child('jobs'));
-
+            var authData = ref.getAuth();
 
             ref.onAuth(function (authData) {
                 if (authData) {
 
-                    $rootScope.authData = authData;
+                    //$rootScope.authData = authData;
                     console.log("Authenticated with uid:", authData.uid);
                 } else {
-                    console.log("Client unauthenticated.")
+                    console.log("Client unauthenticated.");
+                    //$state.transitionTo('login', null, {'reload': true});
+                    $location.path('/login');
                 }
             });
+
+            $scope.jobs = $firebaseArray(ref.child('jobs'));
+
 
         }]);
