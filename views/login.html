@@ -1,33 +1,27 @@
-
-<!--<div id="fb-root"></div>-->
-<!--<script>(function(d, s, id) {-->
-    <!--var js, fjs = d.getElementsByTagName(s)[0];-->
-    <!--if (d.getElementById(id)) return;-->
-    <!--js = d.createElement(s); js.id = id;-->
-    <!--js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.3&appId=243516039009459";-->
-    <!--fjs.parentNode.insertBefore(js, fjs);-->
-<!--}(document, 'script', 'facebook-jssdk'));</script>-->
-
 <div class=login-page>
     <div class=row>
-        <div class="col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-md-offset-4 col-sm-offset-4 col-lg-offset-4">
             <img src=images/flat-avatar.png class=user-avatar>
 
             <h1>工作教育網
-                <br/>  <small>自立支援服務</small>
+                <br/>
+                <small>自立支援服務</small>
             </h1>
-            <form role=form ng-submit=submit()>
-                <div class=form-content>
-                    <!--TODO 把 input type=text 改成 type= email-->
-                    <div class=form-group><input type=text class="form-control input-underline input-lg"
-                                                 placeholder=Email></div>
-                    <div class=form-group><input type=password class="form-control input-underline input-lg"
-                                                 placeholder=Password></div>
-                </div>
-                <button type=submit class="btn btn-white btn-outline btn-lg btn-rounded">Login</button>
-            </form>
+            <h4>Login with</h4>
 
-            <!--<div  ng-click=submit() class="fb-login-button" data-max-rows="10" data-size="large" data-show-faces="true" data-auto-logout-link="true"></div>-->
+            <div class="social-box well center-block btn-rounded">
+                <a ng-click="loginfb()" href="#" class="btn-lg btn-primary btn-block">
+                    <i class="icon-facebook"></i>   Facebook
+                </a>
+                <a href="#" class="btn-lg btn-danger btn-block">
+                    <i class="icon-google-plus"></i>  Google
+                </a>
+            </div>
+
+            <!--<div ng-click="testlogin()" class="btn btn-default"><h4>test login</h4>-->
+                <!--<a ng-click="testlogout()" href="#" class="btn btn-success btn-lg"><i class="icon-edit icon-white"></i>-->
+                    <!--Logout</a></div>-->
+
 
         </div>
     </div>
