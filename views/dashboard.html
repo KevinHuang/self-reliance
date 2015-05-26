@@ -10,11 +10,12 @@
 
                     <!-- TODO: Change to personal profile, make a page first-->
                     <a ui-sref="profile">
-                    <img ng-src="{{'http://graph.facebook.com/' + authData.facebook.id + '/picture?type=large'}}"  class=user-avatar>
+                    <img ng-src="{{'http://graph.facebook.com/' + authData.facebook.id + '/picture?type=large';}}"  class=user-avatar>
                     </a>
 
                     <!--<br> <a ui-sref=login class="btn btn-white btn-outline btn-rounded btn-sm">Logout</a>-->
                     <br> <a ng-click="logout()" ui-sref=login class="btn btn-white btn-outline btn-rounded btn-sm">Logout</a>
+
                 </div>
                 <ul class="nav nav-sidebar">
                     <li ng-class="{active: $state.includes('job')}"><a ui-sref=job>Job <span

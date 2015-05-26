@@ -64,8 +64,8 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
     }])
 
 
-    .controller("LoginCtrl", ["$scope", "$state",
-        function ($scope, $state) {
+    .controller("LoginCtrl", ["$scope", "$state", "$timeout", "$location",
+        function ($scope, $state, $timeout, $location) {
             $scope.$state = $state;
             var ref = new Firebase("https://amber-heat-6612.firebaseio.com");
             var authData = ref.getAuth();
@@ -73,7 +73,7 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
                 $scope.authData = authData;
                 $state.go('job');
             } else {
-                $state.go('login');
+                //$state.go('login');
             }
 
             function getName(authData) {
@@ -122,20 +122,28 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
 
         }])
 
-    .controller("DashboardCtrl", ["$scope", "$state", function ($scope, $state) {
-        $scope.$state = $state;
-        var ref = new Firebase("https://amber-heat-6612.firebaseio.com");
-        var authData = ref.getAuth();
-        if (authData) {
-            $scope.authData = authData;
-        } else {
-            $state.go('login');
-        }
-        $scope.logout = function () {
-            ref.unauth();
-        };
+    .controller("DashboardCtrl", ["$scope", "$rootScope", "$state", "$location", "$timeout",
+        function ($scope, $state, $rootScope, $location, $timeout) {
+            $scope.$state = $state;
+            var ref = new Firebase("https://amber-heat-6612.firebaseio.com");
+            ref.onAuth(function (authData) {
+                if (authData) {
+                    console.log("Authenticated with uid:", authData.uid);
 
-    }])
+                    //$rootScope.authData = authData;
+                    $scope.authData = authData;
+                    console.log(authData);
+                } else {
+                    console.log("Client unauthenticated.");
+                    $location.path('/login');
+                }
+            });
+
+            $scope.logout = function () {
+                ref.unauth();
+            };
+
+        }])
 
 
     .controller("ProfileCtrl", ["$scope", "$state", "$firebaseObject", function ($scope, $state, $firebaseObject) {
@@ -156,6 +164,7 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
             }, function (error) {
                 console.log("Error:", error);
             });
+            $state.go('profile')
         }
     }])
 
@@ -230,25 +239,20 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
         console.log($scope.entry.salary1);
     }])
 
-    .controller("JobCtrl", ["$scope", "$firebaseArray",
-        function ($scope, $firebaseArray) {
-            var ref = new Firebase("https://amber-heat-6612.firebaseio.com/jobs");
-            $scope.jobs = $firebaseArray(ref);
+    .controller("JobCtrl", ["$scope", "$firebaseArray", "$rootScope", "$timeout",
+        function ($scope, $firebaseArray, $rootScope, $timeout) {
             var ref = new Firebase("https://amber-heat-6612.firebaseio.com");
-
-            var authData = ref.getAuth();
-            $scope.authdata = authData;
-            $scope.testlogin = function () {
+            $scope.jobs = $firebaseArray(ref.child('jobs'));
 
 
+            ref.onAuth(function (authData) {
                 if (authData) {
-                    console.log("User " + authData.uid + " is logged in with " + authData.provider);
-                    console.dir(authData);
-                    $scope.authdata = authData;
-                } else {
-                    console.log("User is logged out");
-                }
-                ;
 
-            };
+                    $rootScope.authData = authData;
+                    console.log("Authenticated with uid:", authData.uid);
+                } else {
+                    console.log("Client unauthenticated.")
+                }
+            });
+
         }]);

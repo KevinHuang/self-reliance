@@ -1,14 +1,15 @@
 <div><a ui-sref=editprofile class="pull-right btn btn-primary btn-outline btn-rounded">編輯檔案</a>
-
-    <h2>個人檔案</h2>
+<div class="row">
+    <h2><a href={{user.authdata.facebook.cachedUserProfile.link}}
+           target="_blank" class="icon-facebook btn btn-primary btn-lg btn-outline btn-rounded"></a>個人檔案</h2>
 
     <div class=jumbotron>
         <div class=container><h1 class="text-center">{{ user.name}}</h1>
 
-            <p class="h4">職業: {{ user.job}}</p>
-            <p>Habit: {{ user.habits}}</p>
-            <p>Talents:</p> <p ng-bind-html=" user.talents | nl2br"></p>
+            <p><span class="btn btn-lg btn-info">職業</span> {{ user.job}}</p>
+            <p><span class="btn btn-lg btn-info">Habit</span> {{ user.habits}}</p>
+            <p><span class="btn btn-lg btn-info">Talents</span> <span ng-bind-html=" user.talents | nl2br"></span></p>
 
-            <p><a href={{user.authdata.facebook.cachedUserProfile.link}} target="_blank" class="btn btn-primary btn-lg btn-outline btn-rounded">Learn more</a></p></div>
+            <p></p></div></div>
     </div>
 </div>

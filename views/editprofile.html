@@ -1,4 +1,4 @@
-<div><a ui-sref=profile class="pull-right btn btn-primary btn-outline btn-rounded">預覽檔案</a>
+<div><a ui-sref=profile ng-click="saveProfile()" ng-disabled="form.$invalid" class="pull-right btn btn-primary btn-outline btn-rounded">預覽檔案</a>
 
 
 </div>
@@ -28,7 +28,7 @@
 程式語言--python--入門"></textarea>
                 <p class="help-block">詳細介紹可以讓大家更認識你</p>
             </div>
-            <button type="submit" class="btn btn-success" ng-disabled="form.$invalid">Save Profile</button>
+            <!--<button type="submit" class="btn btn-success" ng-disabled="form.$invalid">Save Profile</button>-->
 
         </form>
     </div>
