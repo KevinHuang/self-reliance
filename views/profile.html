@@ -3,12 +3,12 @@
     <h2>個人檔案</h2>
 
     <div class=jumbotron>
-        <div class=container><h1>{{ user.name}}</h1>
+        <div class=container><h1 class="text-center">{{ user.name}}</h1>
 
-            <p><strong>About:</strong> {{ user.job}}</p>
-            <p><strong>Habit:</strong> {{ user.habits}}</p>
-            <p><strong>Talents:</strong></p> <p ng-bind-html=" user.talents | nl2br"></p>
+            <p class="h4">職業: {{ user.job}}</p>
+            <p>Habit: {{ user.habits}}</p>
+            <p>Talents:</p> <p ng-bind-html=" user.talents | nl2br"></p>
 
-            <p><a class="btn btn-primary btn-lg btn-outline btn-rounded">Learn more</a></p></div>
+            <p><a href={{user.authdata.facebook.cachedUserProfile.link}} target="_blank" class="btn btn-primary btn-lg btn-outline btn-rounded">Learn more</a></p></div>
     </div>
 </div>
