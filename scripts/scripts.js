@@ -75,7 +75,7 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
                 $scope.authData = authData;
                 addUserdata(ref);
                 console.log("Adding user data!")
-                //$state.go('job');
+                $state.go('job');
             } else {
                 //$state.go('login');
             }
