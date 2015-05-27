@@ -7,7 +7,7 @@ body
 .profile
 {
     min-height: 355px;
-    display: inline-block;
+    display: inline-table;
 }
 figcaption.ratings
 {

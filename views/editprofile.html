@@ -1,4 +1,5 @@
-<div><a ui-sref=profile ng-click="saveProfile()" ng-disabled="form.$invalid" class="pull-right btn btn-primary btn-outline btn-rounded">預覽檔案</a>
+<div><a ui-sref=profile ng-click="saveProfile()" ng-disabled="form.$invalid"
+        class="pull-right btn btn-primary btn-outline btn-rounded">預覽檔案</a>
 
 
 </div>
@@ -7,14 +8,18 @@
         <h2>自我介紹</h2>
 
         <p>介紹你的專長、讓大家更認識你</p>
+
         <form name="form" ng-submit="saveProfile()" novalidate>
             <div class="form-group">
                 <label for="fullname">Your name (what other members will see)</label>
-                <input ng-model="user.name" type="text" class="form-control" id="fullname" placeholder="Enter your name" required>
+                <input ng-model="user.name" type="text" class="form-control" id="fullname" placeholder="Enter your name"
+                       required>
             </div>
             <div class="form-group">
                 <label for="job">工作</label>
-                <input ng-model="user.job" type="text" class="form-control" id="job" placeholder="Enter your job" required>
+                <input ng-model="user.job" type="text" class="form-control" id="job" placeholder="Enter your job"
+                       required>
+
                 <p class="help-block">For example: '正大聯合會計師事務所 稅務助理'</p>
             </div>
             <div class="form-group">
@@ -22,12 +27,21 @@
                 <input ng-model="user.habits" type="text" class="form-control" id="description" placeholder="釣魚，跑步">
             </div>
             <div class="form-group">
+                    <label for="stories">才能介紹</label><br/>
+                    <ul class="">
+                        <li ng-repeat="eachtalent in user.talents track by $index">
+                            {{eachtalent.talent}} -- {{ eachtalent.rating}}
+                        </li>
+                    </ul>
+                    <input type="text" autofocus ng-model="talentnew" id ="stories" class="" placeholder="python">
+                    <select ng-model="rate" ng-options="item.rating for item in ratingModel">
+                        <option value="">-- 請選擇 --</option>
+                    </select>
+                <button type="button" class="btn btn-success " ng-click="addTalent()"><span class="glyphicon glyphicon-plus"></span> Add</button>
 
-                <label for="stories">才能介紹</label>
-                <textarea ng-model="user.talents"  rows="6" class="form-control" id="stories" placeholder="鋼琴--小奏鳴曲彈完
-程式語言--python--入門"></textarea>
-                <p class="help-block">詳細介紹可以讓大家更認識你</p>
+                    <p class="help-block">詳細介紹可以讓大家更認識你</p>
             </div>
+            </form>
             <!--<button type="submit" class="btn btn-success" ng-disabled="form.$invalid">Save Profile</button>-->
 
         </form>
