@@ -114,7 +114,8 @@ angular.module("yapp", ["firebase", "ui.router", "ngAnimate", "ui.bootstrap", "n
             // login with Facebook
             $scope.loginfb = function () {
                 console.log('This is loginctrl!');
-                ref.authWithOAuthRedirect("facebook", function (error) {
+                // ref.authWithOAuthRedirect("facebook", function (error) {
+                ref.authWithOAuthPopup("facebook", function (error) {
                     if (error) {
                         console.log("Login failed!", error);
                     } else {
